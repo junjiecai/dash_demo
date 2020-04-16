@@ -1,0 +1,23 @@
+body {
+    width: 70%;
+    height: 100%;
+    margin: auto;
+    font-size: 1.1rem;
+    font-family: "Microsoft Yahei", sans-serif;
+    font-color: #222;
+}
+
+li {
+    list-style-type: -moz-arabic-indic;
+}
+
+a:link {
+    color: #696969;
+    text-decoration: none;
+}
+
+
+a:visited {
+    color: #696969;
+    text-decoration: none;
+}

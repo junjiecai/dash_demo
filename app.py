@@ -8,6 +8,7 @@ import dash_table
 import plotly.express as px
 
 app = dash.Dash(__name__)
+app.title = 'Synyi'
 
 df = px.data.gapminder()
 initial_data = df.loc[df['year'] == 1952]
@@ -39,6 +40,18 @@ ploty的交互图升级成dash后带来的好处：
         * [Dash Core Component](https://dash.plotly.com/dash-core-components)
         * [DataTable](https://dash.plotly.com/dash-core-components)
         * 其他（请在官方文档查询）
+        
+# Step2
+修改样式让整体结果更加美观，不同的途径
+* 通过提供css, 可以放在assets/styles.css中
+* 通过python为组件传入参数
+
+注意：不管是复合组件，还是html组件，最终在浏览器中都会被转化成html标签。
+
+html和css不是这次分享重点，不熟悉忽略即可，不影响对dash的理解。
+
+除此之外，也可替换浏览器的页面图标
+
 '''
 
 # 通过定义app.layout方式，定义Dashboard页面的结构
@@ -73,7 +86,17 @@ app.layout = html.Div(children=[
         sort_mode="multi",
         page_action="native",
         page_current=0,
-        page_size=10
+        page_size=10,
+        style_data_conditional=[
+            {
+                'if': {'row_index': 'odd'},
+                'backgroundColor': 'rgb(248, 248, 248)'
+            }
+        ],  # 通过python参数方式控制样式的例子
+        style_header={
+            'backgroundColor': 'rgb(230, 230, 230)',
+            'fontWeight': 'bold'
+        }
     )  # 组合组件：数据表
 ])
 
