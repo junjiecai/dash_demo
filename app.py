@@ -63,6 +63,10 @@ html和css不是这次分享重点，不熟悉忽略即可，不影响对dash的
 # Step3
 增加交互效果：
 逻辑：监听Input定义的目标，如果发生改变，调用函数，并且升级Output定义的目标
+
+# Step4
+增加加载提示：
+用dcc.load组件作为存放刷新较慢的组件的容器即可
 '''
 
 
@@ -94,10 +98,16 @@ app.layout = html.Div(children=[
         markdown_content
     )),  # 预封装组件
     html.H2('可视化'),
-    dcc.Graph(
-        id='plot',
-        figure=create_figure(initial_data, 1952)
-    ),  # Plotly Graph组件
+    dcc.Loading(
+        dcc.Graph(
+            id='plot',
+            figure=create_figure(initial_data, 1952),
+            config={
+                'displayModeBar': False
+            }
+        ),  # Plotly Graph组件
+        type='circle'
+    ),
     html.Div('选择时间(暂不生效)'),
     dcc.Slider(
         id='year_slider',
@@ -109,6 +119,7 @@ app.layout = html.Div(children=[
     ),  # 组合组件：slider控件
     html.H2('明细数据'),
     create_table(1952),
+
 ])
 
 
